@@ -1,0 +1,11 @@
+== Alignment threading replication
+
+A couple of tests to indicate that Bioruby alignment may have thread safety issues.
+
+== Notes
+
+Exceptions seem to be raised by tempfile code of ruby's standard library, rather than merely being raised by Bioruby. It may be that ruby itself has thread safety issues.
+
+The test for how alignment handles multiple threads sometimes passes, and sometimes fails. I have not worked out how to make the tests repeatable. Also, if this is due to a problem in tempfile, the tests may only fail in some versions of ruby.
+
+This test creates a large number of threads. Please ensure that this test won't inconvenience anyone else if you're running it on a shared computer!
