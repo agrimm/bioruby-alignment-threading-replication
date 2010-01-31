@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+raise unless ARGV[1] =~ /-infile=(.*)/
+infile_name = $1
+raise unless ARGV[2] =~ /-outfile=(.*)/
+outfile_name = $1
+raise unless ARGV[3] =~ /-newtree=(.*)/
+newtree_filename = $1
+
+raise "Input not as expected" unless File.read(infile_name) == ">0\ngattaca\n>1\ngattaca\n>2\ngattaca\n>3\ngattaca\n>4\ngattaca\n"
+
+File.open(outfile_name, "a") {|f| f.write("CLUSTAL 2.0.12 multiple sequence alignment\n\n\n0               GATTACA\n1               GATTACA\n2               GATTACA\n3               GATTACA\n4               GATTACA\n                *******\n")}
+File.open(newtree_filename, "a") {|f| f.write("(\n(\n(\n0:0.00000,\n1:0.00000)\n:0.00000,\n2:0.00000)\n:0.00000,\n3:0.00000,\n4:0.00000);\n")}

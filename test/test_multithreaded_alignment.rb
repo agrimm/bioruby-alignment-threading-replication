@@ -10,9 +10,9 @@ module AlignmentHelper
   def align_group(sequence_group)
     begin
       original_alignment = Bio::Alignment.new(sequence_group)
-      factory = Bio::ClustalW.new
+      factory = Bio::ClustalW.new("bin/fake_clustalw")
       completed_alignment = original_alignment.do_align(factory)
-    rescue RuntimeError
+    #rescue RuntimeError
       #Ignore, to ensure that tempfile itself complains about problems, rather than bioruby
     end
   end    
@@ -24,7 +24,7 @@ class TestAlignment < Test::Unit::TestCase
   #This test already passes
   def test_alignment_works_in_single_thread
     assert_nothing_raised("Can't handle single threaded scenario") do
-      SEQUENCE_GROUPS.each do |sequence_group|
+      SEQUENCE_GROUPS[0..10].each do |sequence_group|
         align_group(sequence_group)
       end
     end
